@@ -60,10 +60,10 @@ import json
 HELP_MESSAGE = """Help:
 Creates the ausdley test table
 -h, --help    Displays this help
--c            The Ci column
--b            The Bi column (avoid if not present)
--t            The Ti column
--d            The Di column (if present performs the test)
+-c "<array>"  The Ci column
+-b "<array>"  The Bi column (avoid if not present)
+-t "<array>"  The Ti column
+-d "<array>"  The Di column (if present performs the test)
 -l            Shows the license
 Columns must be rappresented in array form. E.g. "[1,2,3,4]"
 """  
