@@ -97,7 +97,7 @@ for opt, arg in opts:
 
 if settings["b"] == None:
     settings["b"] = [0 for i in range(0, len(settings["c"]))]
-if len(settings["c"]) != len(settings["t"]) != len(settings["t"]):
+if len(settings["c"]) != len(settings["t"]) != len(settings["b"]):
     raise ValueError("All array must be equal length")
 if settings["d"] != None and len(settings["d"]) != len(settings["t"]):
     raise ValueError("All array must be equal length")
