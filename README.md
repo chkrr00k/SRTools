@@ -44,6 +44,7 @@ Supported servers:
 `--ps`          Polling server  
 `--tbs`         Total bandwith server  
 `--pes`         Priority exchange server  
+`--des`         Deferrable server  
 
 ### Examples
 Executes the background server  
