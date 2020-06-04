@@ -270,7 +270,48 @@ def pes(end, t, c, r, cap, ts):
                     pc[i] -= 1
         
         time += 1
-    
+        
+def defr(end, t, c, r, cap, ts):
+    time = 0
+    p = [0 for i in range(0, len(t)+1)]
+    ser = serverPos(t, ts)
+    c.insert(ser, cap)
+    while time < end:
+        ready = list()
+        running = -1
+        rr = -1
+        for i in range(0, len(p)):
+            if time % t[i] == 0:
+                p[i] = 0
+            if i == ser:
+                ex = False
+                for j in range(0, len(r)):
+                    if running < 0 and r[j][0] <= time and r[j][1] > 0 and p[i] < c[i]:
+                        r[j][1] -= 1
+                        running = i
+                        
+                        ex = True
+                        rr = i
+                    elif running >= 0 and r[j][0] <= time and r[j][1] > 0 and i not in ready and p[i] < c[i]:
+                        ready.append(i)
+                        ex = True
+            else:    
+                if running < 0 and p[i] < c[i]:
+                    p[i] += 1
+                    running = i
+                elif running >= 0 and p[i] < c[i]:
+                    ready.append(i)
+        cret = c[ser]-p[ser]
+#        if not ex:
+#            p[ser] = c[ser]
+#            cret = 0
+        yield running, ready, time, [cret]
+
+        if rr != -1:
+            p[rr] += 1
+            
+        time += 1
+        
 e = 40
 t = [4,10,32]
 c = [1, 2, 8]
@@ -302,10 +343,11 @@ Supported servers:
 --ps          Polling server
 --tbs         Total bandwith server
 --pes         Priority exchange server
+--des         Deferrable server
 """
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:], "hlc:r:t:e:T:C:", ["bg", "ps", "tbs", "pes", "help"])
+    opts, args = getopt.getopt(sys.argv[1:], "hlc:r:t:e:T:C:", ["des", "bg", "ps", "tbs", "pes", "help"])
 except getopt.GetoptError:
     print("Error in arguments\n")
     print(HELP_MESSAGE)
@@ -346,6 +388,8 @@ for opt, arg in opts:
         s["f"].append(tbs)
     elif opt in ("--pes"):
         s["f"].append(pes)
+    elif opt in ("--des"):
+        s["f"].append(defr)
 
 if len(s["t"]) != len(s["c"]):
     print("-t must be long as -c")
