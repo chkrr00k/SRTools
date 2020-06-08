@@ -47,20 +47,21 @@ def show(x, y, e, t, c, r, f, *ar, tags=None):
             turtle.write(tags[i])
         x+=15
     capacity = list()
-    for ru, re, ti, cap in f(e, copy.deepcopy(t), copy.deepcopy(c), copy.deepcopy(r), *ar):
+    for ru, re, ti, cap in f(e+1, copy.deepcopy(t), copy.deepcopy(c), copy.deepcopy(r), *ar):
         if len(capacity) != len(cap):
             for i in range(0, len(cap)-len(capacity)):
                 capacity.append([])
         for i in range(0, len(cap)):
             capacity[i].append(cap[i])
-        if ru >= 0:
-            turtle.setx(x+ ti*15)
-            turtle.sety(y+ 20+ru*15)
-            turtle.write(RU_LBL)
-        for pr in re:
-            turtle.setx(x+ ti*15)
-            turtle.sety(y+ 20+pr*15)
-            turtle.write(R_LBL)
+        if ti < e:
+            if ru >= 0:
+                turtle.setx(x+ ti*15)
+                turtle.sety(y+ 20+ru*15)
+                turtle.write(RU_LBL)
+            for pr in re:
+                turtle.setx(x+ ti*15)
+                turtle.sety(y+ 20+pr*15)
+                turtle.write(R_LBL)
                 
     printcap = all([True if len(c) > 0 else False for c in capacity])
     size = turtle.pensize()
@@ -268,6 +269,7 @@ def pes(end, t, c, r, cap, ts):
             for i in range(0, len(pc)):
                 if pc[i] > 0:
                     pc[i] -= 1
+                    break
         
         time += 1
         
@@ -408,6 +410,9 @@ turtle.penup()
 turtle.speed(10)
 turtle.color("black")
 turtle.bgcolor("white")
+
+#l=show(0, l + 40, e, [8,10,12,15], [2,1,2,2], [[5,3],[15,4],[25,2],[35,1]], pes, 2, 7)
+
 for f in s["f"]:
     l = show(0, l, s["e"], s["t"], s["c"], s["r"], f, s["cs"], s["ts"]) + 40
 
