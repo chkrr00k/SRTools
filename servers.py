@@ -306,9 +306,8 @@ def defr(end, t, c, r, cap, ts):
                 elif running >= 0 and p[i] < c[i]:
                     ready.append(i)
         cret = c[ser]-p[ser]
-#        if not ex:
-#            p[ser] = c[ser]
-#            cret = 0
+        if cret > 0 and ser not in ready:
+            ready.append(ser)
         yield running, ready, time, [cret]
 
         if rr != -1:
@@ -413,7 +412,7 @@ turtle.speed(10)
 turtle.color("black")
 turtle.bgcolor("white")
 
-l=show(0, l + 40, e, [4,10,32], [1,2,8], [[5,2],[14,3],[23,3]], plig, 2, 8)
+#l=show(0, l + 40, e, [4,10,32], [1,2,8], [[5,2],[14,3],[23,3]], defr, 2, 8)
 
 for f in s["f"]:
     l = show(0, l, s["e"], s["t"], s["c"], s["r"], f, s["cs"], s["ts"]) + 40
