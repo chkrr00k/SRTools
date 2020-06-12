@@ -158,9 +158,11 @@ def plig(end, t, c, r, cap, ts):
                 elif running >= 0 and p[i] < c[i]:
                     ready.append(i)
         cret = c[ser]-p[ser]
-        if not ex:
+        if not ex and running > ser:
             p[ser] = c[ser]
             cret = 0
+        if cret > 0 and ser not in ready:
+            ready.append(ser)
         yield running, ready, time, [cret]
 
         if rr != -1:
@@ -411,7 +413,7 @@ turtle.speed(10)
 turtle.color("black")
 turtle.bgcolor("white")
 
-#l=show(0, l + 40, e, [8,10,12,15], [2,1,2,2], [[5,3],[15,4],[25,2],[35,1]], pes, 2, 7)
+l=show(0, l + 40, e, [4,10,32], [1,2,8], [[5,2],[14,3],[23,3]], plig, 2, 8)
 
 for f in s["f"]:
     l = show(0, l, s["e"], s["t"], s["c"], s["r"], f, s["cs"], s["ts"]) + 40
