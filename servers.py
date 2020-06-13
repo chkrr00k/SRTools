@@ -216,8 +216,8 @@ def pes(end, t, c, r, cap, ts):
     time = 0
     p = [0 for i in range(0, len(t)+1)]
     pc = [0 for i in range(0, len(t)+1)]
-    ser = 0
-    t.insert(ser, ts)
+    ser = serverPos(t, ts)
+#    t.insert(ser, ts)
     c.insert(ser, cap)
     while time < end:
         ready = list()
@@ -256,7 +256,7 @@ def pes(end, t, c, r, cap, ts):
                 elif running >= 0 and p[i] < c[i]:
                     ready.append(i)
         
-        yield running, ready, time, pc
+        yield running, ready, time, pc[ser:]
 
         if running >= 0 and running != ser:
             for i in range(0, running):
@@ -412,7 +412,7 @@ turtle.speed(10)
 turtle.color("black")
 turtle.bgcolor("white")
 
-#l=show(0, l + 40, e, [4,10,32], [1,2,8], [[5,2],[14,3],[23,3]], defr, 2, 8)
+#l=show(0, l + 40, e, [6,8,38], [1,2,9], [[6,2],[10,1],[14,4],[27,2]], pes, 3, 10)
 
 for f in s["f"]:
     l = show(0, l, s["e"], s["t"], s["c"], s["r"], f, s["cs"], s["ts"]) + 40
