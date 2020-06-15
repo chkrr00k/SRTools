@@ -158,7 +158,7 @@ def plig(end, t, c, r, cap, ts):
                 elif running >= 0 and p[i] < c[i]:
                     ready.append(i)
         cret = c[ser]-p[ser]
-        if not ex and running > ser:
+        if not ex and running > ser or running < 0 and len(ready) == 0:
             p[ser] = c[ser]
             cret = 0
         if cret > 0 and ser not in ready:
