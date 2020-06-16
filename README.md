@@ -14,6 +14,17 @@ Creates the table for the audsley test
   
 All columns must be rappresented in array form. E.g. `"[1, 2, 3, 4]"`
 
+## burchard.py
+
+Creates the table for the burchard test
+
+`-c "<array>"`  The Ci column  
+`-t "<array>"`  The Ti column  
+`-h, --help`    Displays the help  
+`-l`            Shows the license  
+  
+All columns must be rappresented in array form. E.g. `"[1, 2, 3, 4]"`
+
 ## edf.py
 
 Creates the table for the EDF test
