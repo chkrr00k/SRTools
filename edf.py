@@ -43,7 +43,8 @@ def getD(t, d, m):
     for i in range(len(d)):
         current = d[i]
         while current < m:
-            result.append(current)
+            if current not in result:
+                result.append(current)
             current += t[i]
     result.sort()
     return result
