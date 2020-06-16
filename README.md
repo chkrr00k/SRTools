@@ -14,6 +14,18 @@ Creates the table for the audsley test
   
 All columns must be rappresented in array form. E.g. `"[1, 2, 3, 4]"`
 
+## edf.py
+
+Creates the table for the EDF test
+
+`-c "<array>"`  The Ci column  
+`-t "<array>"`  The Ti column  
+`-d "<array>"`  The Di column  
+`-h, --help`    Displays the help  
+`-l`            Shows the license  
+  
+All columns must be rappresented in array form. E.g. `"[1, 2, 3, 4]"`
+
 ## han.py
 
 Creates the table for the han test
